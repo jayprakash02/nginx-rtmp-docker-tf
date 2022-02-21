@@ -24,7 +24,13 @@ RUN apk add --update \
     pkgconfig \
     zlib-dev
 
-# Get nginx
+# Get nginx source.
+RUN cd /tmp && \
+  wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
+  tar zxf nginx-${NGINX_VERSION}.tar.gz && \
+  rm nginx-${NGINX_VERSION}.tar.gz
+
+# Get rtmp module
 RUN cd /tmp && \
     wget https://github.com/arut/nginx-rtmp-module/archive/v${NGINX_RTMP_VERSION}.tar.gz && \
     tar zxf v${NGINX_RTMP_VERSION}.tar.gz && rm v${NGINX_RTMP_VERSION}.tar.gz
@@ -45,9 +51,9 @@ RUN cd /tmp/nginx-${NGINX_VERSION} && \
 
 # Add NGINX path, config and static files.
 ENV PATH "${PATH}:/usr/local/nginx/sbin"
-ADD nginx.conf /etc/nginx/nginx.conf.template
+ADD nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /opt/data && mkdir /www
-ADD static /www/static
+#ADD static /www/static
 
 EXPOSE 1935
 EXPOSE 80

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx-rmtp:
-    build: .
+    image: rtmp-nginx:latest
     ports:
       - 8080:80
       - 1935:1935
