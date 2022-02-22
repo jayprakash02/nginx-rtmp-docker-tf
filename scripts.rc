@@ -1,0 +1,2 @@
+#ffmpeg -re -i test.mp4 -c:a aac -f flv rtmp:127.0.0.1:1935/live/test
+ffmpeg -f v4l2 -framerate 25 -video_size 640x480 -i /dev/video0 -f flv rtmp:127.0.0.1:1935/live/test
